@@ -2,43 +2,40 @@ package testCases;
 
 import com.thoughtworks.gauge.Step;
 import io.github.bonigarcia.wdm.WebDriverManager;
-
-import java.util.List;
-
 import org.junit.Assert;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class TC_Avansas {
+import java.util.List;
+
+public class T_Avansas_Gauge {
     WebDriver driver;
+    long count;
 
-    public void testAvansas() throws InterruptedException {
-        //Create a instance of ChromeOptions class
-        ChromeOptions options = new ChromeOptions();
-
-        //Add chrome switch to disable notification - "**--disable-notifications**"
-        options.addArguments("--disable-notifications");
+    @Step("Kullanıcı avansas sitesine girer")
+    public void implementation1() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(options);
-
-        //Launch the application
+        driver = new ChromeDriver();
         driver.get("https://www.avansas.com");
         WebDriverWait wait = new WebDriverWait(driver, 7);
         driver.manage().window().maximize();
 
-        // Avansas.com da arama alanına “kalem”yazılarak ara butonu tıklanır.
+    }
+
+    @Step("Avansas.com da arama alanına “kalem”yazılarak ara butonu tıklanır.")
+    public void implementation2() {
         WebElement searchTextInput = driver.findElement(By.cssSelector("input[name='q']"));
         searchTextInput.sendKeys("kalem");
         WebElement araBtn = driver.findElement(By.cssSelector("form#multiple-datasets > button"));
         araBtn.click();
+    }
 
-        // Kategori listesinden kurşun kalemler kategorisi tıklanır.
+    @Step("Kategori listesinden kurşun kalemler kategorisi tıklanır.")
+    public void implementation3() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
         // WebElement kategoriKursunKalemler = driver.findElement(By.partialLinkText("Kurşun Kalemler"));
@@ -47,7 +44,7 @@ public class TC_Avansas {
 
 
         js.executeScript("arguments[0].scrollIntoView();", kategoriKursunKalemler);
-        /*            
+        /*
         while(!(kategoriKursunKalemler.isDisplayed())) {
     	js.executeScript("scrollBy(0,100);");
         }
@@ -57,10 +54,11 @@ public class TC_Avansas {
 
 //            wait.until(ExpectedConditions.elementToBeClickable(kategoriKursunKalemler)).
         kategoriKursunKalemler.click();
+    }
 
-        // Sıralama fonksiyonundan ada göre sırala seçilir.
-
-//            Select dropDown = new Select(driver.findElement(By.id("sort")));
+    @Step("Sıralama fonksiyonundan ada göre sırala seçilir.")
+    public void implementation4() {
+        //            Select dropDown = new Select(driver.findElement(By.id("sort")));
 //            dropDown.selectByValue("isim-a-z");
 
         WebElement dropDown = driver.findElement(By.cssSelector("span[class *= 'select2 select2-container']"));
@@ -68,20 +66,22 @@ public class TC_Avansas {
 
         WebElement select = driver.findElement(By.cssSelector("li[id $= 'isim-a-z']"));
         select.click();
+    }
 
-        // Gelen ürün listesinde adında “Bic Evolution” içeren kaç ürün olduğu tespit edilir.
-
+    @Step("Gelen ürün listesinde adında “Bic Evolution” içeren kaç ürün olduğu tespit edilir.")
+    public void implementation5() {
         List<WebElement> productList = driver.findElements(By.cssSelector("div[class *= 'list-container'] div[class='product-list']"));
 
-        long count = productList.stream().map(a -> a.getAttribute("data-product-name")).filter(a -> a.indexOf("Bic Evolution") != -1).count();
-        // Ürün adeti tespit edilir ve 0 dan fazla ise test başarılıdır.
+        count = productList.stream().map(a -> a.getAttribute("data-product-name")).filter(a -> a.indexOf("Bic Evolution") != -1).count();
+    }
+
+    @Step("Ürün adeti tespit edilir ve 0 dan fazla ise test başarılıdır, 0 ise başarısızdır.")
+    public void implementation6() {
         Assert.assertTrue(count > 0);
-
-        System.out.println(count);
-        // Ürün adeti 0 ise test başarısızdır
-
     }
 
-
+    @Step("Tarayıcı kapatılır.")
+    public void implementation7() {
+        driver.quit();
     }
-
+}

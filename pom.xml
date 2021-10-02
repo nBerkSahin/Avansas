@@ -20,6 +20,17 @@
 
   <dependencies>
     <dependency>
+      <groupId>com.thoughtworks.gauge</groupId>
+      <artifactId>gauge-java</artifactId>
+      <version>0.7.15</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.thoughtworks.gauge.maven/gauge-maven-plugin -->
+    <dependency>
+      <groupId>com.thoughtworks.gauge.maven</groupId>
+      <artifactId>gauge-maven-plugin</artifactId>
+      <version>1.4.3</version>
+    </dependency>
+    <dependency>
       <groupId>io.github.bonigarcia</groupId>
       <artifactId>webdrivermanager</artifactId>
       <version>5.0.2</version>
@@ -54,7 +65,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
+          <version>3.8.1</version>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
@@ -83,5 +94,16 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>8</source>
+          <target>8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+
   </build>
 </project>
