@@ -18,16 +18,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TC_Avansas {
     WebDriver driver;
 
+    @Test
     public void testAvansas() throws InterruptedException {
-        //Create a instance of ChromeOptions class
+        //ChromeOptions sınıfı
         ChromeOptions options = new ChromeOptions();
 
-        //Add chrome switch to disable notification - "**--disable-notifications**"
+        //"**--disable-notifications**"
         options.addArguments("--disable-notifications");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
 
-        //Launch the application
+        //APP giriş
         driver.get("https://www.avansas.com");
         WebDriverWait wait = new WebDriverWait(driver, 7);
         driver.manage().window().maximize();
