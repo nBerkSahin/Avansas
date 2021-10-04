@@ -1,7 +1,7 @@
 Specification Heading
 =
 
-
+     
 Avansas Test Senaryosu
 -
 *Kullanıcı avansas sitesine girer
@@ -11,5 +11,3 @@ Avansas Test Senaryosu
 *Gelen ürün listesinde adında “Bic Evolution” içeren kaç ürün olduğu tespit edilir.
 *Ürün adeti tespit edilir ve 0 dan fazla ise test başarılıdır, 0 ise başarısızdır.
 *Tarayıcı kapatılır.
-
-
