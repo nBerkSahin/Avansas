@@ -22,3 +22,4 @@ RUN gauge install \
     && gauge install screenshot
 
 CMD ["gauge", "run",  "specs"]
+
